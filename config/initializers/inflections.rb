@@ -11,6 +11,11 @@
 # end
 
 # These inflection rules are supported but not enabled by default:
-# ActiveSupport::Inflector.inflections(:en) do |inflect|
-#   inflect.acronym 'RESTful'
-# end
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.acronym 'HVboom'
+  inflect.uncountable 'HVboom'
+  inflect.acronym 'HVKeyGuard'
+  inflect.uncountable 'HVKeyGuard'
+  inflect.acronym 'HVCrypto'
+  inflect.uncountable 'HVCrypto'
+end

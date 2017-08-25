@@ -1,0 +1,18 @@
+.rov.justify-content-center
+  .col.col-md-8.offset-md-2
+    .card
+      .card-header
+        %h4= t('.sign_in', default: 'Sign in')
+      .card-block
+        = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f|
+          .form-group.row
+            = f.label :login, class: 'col-md-3 col-form-label'
+            .col-md-9
+              = f.text_field :login, autofocus: true, class: 'form-control', placeholder: t('.login_placeholder', default: 'Name or eMail')
+          .form-group.row
+            = f.label :password, class: 'col-md-3 col-form-label'
+            .col-md-9
+              = f.password_field :password, autocomplete: 'off', class: 'form-control'
+          = f.submit  t('.sign_in', default: 'Sign in'), class: 'btn btn-outline-primary'
+      .card-footer
+        = render 'devise/shared/links'

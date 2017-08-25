@@ -1,15 +1,16 @@
 !!!
-%html
+%html{lang: 'en'}
   %head
-    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
-    %title= content_for?(:title) ? yield(:title) : 'Hv Key Guard'
-    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Hv Key Guard'}"}
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
+    %meta{charset: 'utf-8'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0, shrink-to-fit=no'}
+    %title= content_for?(:title) ? yield(:title) : 'HVKeyGuard'
+    %meta{name: 'description', content: "#{content_for?(:description) ? yield(:description) : 'HVKeyGuard'}"}
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
   %body
     %header
       = render 'layouts/navigation'
-    %main{:role => "main"}
+    %main.container{role: 'main'}
       = render 'layouts/messages'
       = yield

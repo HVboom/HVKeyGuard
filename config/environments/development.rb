@@ -45,6 +45,11 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  # Better errors normally works only on localhost
+  BetterErrors::Middleware.allow_ip! Rails.application.secrets.trusted_ip
+  config.web_console.whitelisted_ips = Rails.application.secrets.trusted_ip
+
+  # Raises error for missing translations
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 

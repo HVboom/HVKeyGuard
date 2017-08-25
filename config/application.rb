@@ -27,5 +27,10 @@ module HVKeyGuard
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Use UUIDs instead of integer as primary keys
+    # config.generators do |g|
+    #   g.orm :active_record, primary_key_type: :uuid
+    # end
   end
 end
