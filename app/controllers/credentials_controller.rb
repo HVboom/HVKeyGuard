@@ -8,6 +8,7 @@ class CredentialsController < ApplicationController
 
   # GET /credentials/1
   def show
+    render :edit
   end
 
   # GET /credentials/new
@@ -42,7 +43,7 @@ class CredentialsController < ApplicationController
 
     if @credential.save
       # redirect_to @credential, notice: 'Credential was successfully created.'
-      render :index, notice: 'Credential was successfully created.'
+      redirect_to @credential, notice: 'Credential was successfully created.'
     else
       render :new
     end
