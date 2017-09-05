@@ -14,6 +14,8 @@ module HVCrypto
     # Decodes and signs with MessageEncryptor
     def decode(data)
       @encryptor.decrypt_and_verify(data)
+    rescue ActiveSupport::MessageVerifier::InvalidSignature, ActiveSupport::MessageEncryptor::InvalidMessage
+      'Wrong password'
     end
   end
 end

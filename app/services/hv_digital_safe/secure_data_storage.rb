@@ -2,8 +2,10 @@ module HVDigitalSafe
   class SecureDataStorage #  < ActiveModelSerializers::Model
     include ActiveModel::Model
     include HTTParty
+    # FIXME: SSL raises "unknown message" error
+    # ssl_ca_file '/usr/local/etc/letsencrypt/live/hvboom.org/fullchain.pem'
     base_uri Rails.application.secrets.base_uri
-    #debug_output
+    # debug_output
 
     # attributes :token, :document
     attr_accessor :token
@@ -32,6 +34,7 @@ module HVDigitalSafe
       end
 
       def get(path)
+        # Rails.logger.debug "Get: #{path.inspect} / #{headers}"
         response = self.class.get(path, headers: headers, format: :json)
 
         begin
@@ -60,7 +63,7 @@ module HVDigitalSafe
       end
 
       def data
-        #SecureDataStorageSerializer.new(self).to_json
+        # FIXME: SecureDataStorageSerializer.new(self).to_json
         data = HashWithIndifferentAccess.new
         data[:data] = HashWithIndifferentAccess.new
         data[:data][:id] = @token

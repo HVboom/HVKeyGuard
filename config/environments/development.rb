@@ -46,14 +46,23 @@ Rails.application.configure do
   config.assets.quiet = true
 
   # Better errors normally works only on localhost
-  BetterErrors::Middleware.allow_ip! Rails.application.secrets.trusted_ip
+  if Rails.application.secrets.trusted_ip.kind_of?(Array)
+    Rails.application.secrets.trusted_ip.each { |ip| BetterErrors::Middleware.allow_ip! ip }
+  else
+    BetterErrors::Middleware.allow_ip! Rails.application.secrets.trusted_ip
+  end
   config.web_console.whitelisted_ips = Rails.application.secrets.trusted_ip
 
-  # Raises error for missing translations
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # FIXME: SSL call raises "unknown message" error
+  #
+  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  # config.force_ssl = true
+  # config.ssl_options = { hsts: { preload: true } }
 end
