@@ -3,7 +3,7 @@ class CredentialsController < ApplicationController
 
   # GET /credentials
   def index
-    @credentials = Credential.all
+    @credentials = Credential.all.ordered
   end
 
   # GET /credentials/1

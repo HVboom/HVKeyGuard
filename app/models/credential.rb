@@ -19,6 +19,8 @@ class Credential < ApplicationRecord
     presence: true,
     if: -> { self.secured }
 
+  scope :ordered, -> { order :title }
+
   def document
     self[:document] = HVDigitalSafe::SecureDataStorage.new(self.token).document
     if self.secured
