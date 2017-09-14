@@ -3,7 +3,7 @@ class CredentialsController < ApplicationController
 
   # GET /credentials
   def index
-    @credentials = Credential.all.ordered
+    @credentials = Credential.filter(filter_params).ordered
   end
 
   # GET /credentials/1
@@ -78,5 +78,8 @@ class CredentialsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def credential_params
       params.require(:credential).permit(:title, :url, :login, :comment, :secured, :password, :document)
+    end
+    def filter_params
+      params.slice(:title_filter, :url_filter)
     end
 end

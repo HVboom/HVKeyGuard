@@ -1,4 +1,6 @@
 class Credential < ApplicationRecord
+  include Filterable
+
   # virtual attribute for the secured document
   attribute :document, :text
   # virtual attribute for the optional document password
@@ -20,6 +22,8 @@ class Credential < ApplicationRecord
     if: -> { self.secured }
 
   scope :ordered, -> { order :title }
+  scope :title_filter, -> (title) { where('lower(title) like ?', "%#{title.downcase.strip}%") }
+  scope :url_filter, -> (url) { where('lower(url) like ?', "%#{url.downcase.strip}%") }
 
   def document
     self[:document] = HVDigitalSafe::SecureDataStorage.new(self.token).document
