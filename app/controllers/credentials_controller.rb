@@ -42,8 +42,7 @@ class CredentialsController < ApplicationController
     @credential = Credential.new(credential_params)
 
     if @credential.save
-      # redirect_to @credential, notice: 'Credential was successfully created.'
-      redirect_to @credential, notice: 'Credential was successfully created.'
+      redirect_to @credential, notice: t('.notice', default: 'Credential was successfully created.')
     else
       render :new
     end
@@ -56,7 +55,7 @@ class CredentialsController < ApplicationController
       redirect_to edit_document_credential_path(@credential)
     else
       if @credential.update(credential_params)
-        redirect_to @credential, notice: 'Credential was successfully updated.'
+        redirect_to @credential, notice: t('.notice', default: 'Credential was successfully updated.')
       else
         render :edit
       end
@@ -66,7 +65,7 @@ class CredentialsController < ApplicationController
   # DELETE /credentials/1
   def destroy
     @credential.destroy
-    redirect_to credentials_url, notice: 'Credential was successfully destroyed.'
+    redirect_to credentials_url, notice: t('.notice', default: 'Credential was successfully destroyed.')
   end
 
   private

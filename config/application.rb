@@ -32,5 +32,9 @@ module HVKeyGuard
     # config.generators do |g|
     #   g.orm :active_record, primary_key_type: :uuid
     # end
+
+    # I18n prefering German
+    I18n.available_locales = [:en, :de]
+    I18n.default_locale = :de
   end
 end

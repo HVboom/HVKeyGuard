@@ -56,6 +56,9 @@ gem 'faker'
 # Call Rails API application
 gem 'httparty'
 
+# Enable i18n based on request header
+gem 'http_accept_language'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

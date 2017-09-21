@@ -121,6 +121,7 @@ GEM
       haml (>= 4.0, < 6)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
+    http_accept_language (2.1.1)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)
     i18n (0.8.6)
@@ -276,6 +277,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   haml-rails
+  http_accept_language
   httparty
   jquery-rails
   mysql2 (>= 0.3.18, < 0.5)

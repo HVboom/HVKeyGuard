@@ -1,10 +1,10 @@
 -# navigation styled for Bootstrap 4.0
 .container
-  %nav.navbar.navbar-light.bg-faded.navbar-toggleable-md
-    %button.navbar-toggler.navbar-toggler-right{'aria-controls': 'navbarContent', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation', 'data-target': '#navbarContent', 'data-toggle': 'collapse', type: 'button'}
+  %h3= link_to 'HVKeyGuard', root_path, class: 'navbar-brand text-muted'
+
+  %nav.navbar.navbar-light.bg-light.navbar-expand-md.rounded.mb-3
+    %button.navbar-toggler{'aria-controls': 'navbarContent', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation', 'data-target': '#navbarContent', 'data-toggle': 'collapse', type: 'button'}
       %span.navbar-toggler-icon
 
-    = link_to 'HVKeyGuard', root_path, class: 'navbar-brand'
-
     #navbarContent.collapse.navbar-collapse
-      %ul.nav.navbar-nav.mr-auto= render 'layouts/navigation_links'
+      %ul.navbar-nav.nav-justified.text-md-cneter.w-100= render 'layouts/navigation_links'
