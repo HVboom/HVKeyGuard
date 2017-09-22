@@ -1,6 +1,8 @@
 ---
 de:
   layouts:
+    navigation:
+      disclaimer: Benutzung auf eigenes Risiko!
     navigation_links:
       credentials: Zugangsdaten
       disclaimer: Haftungsausschluss

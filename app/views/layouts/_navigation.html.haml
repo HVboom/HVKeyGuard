@@ -1,8 +1,11 @@
 -# navigation styled for Bootstrap 4.0
 .container
-  %h3= link_to 'HVKeyGuard', root_path, class: 'navbar-brand text-muted'
+  %h3.row
+    = link_to 'HVKeyGuard', root_path, class: 'navbar-brand text-muted col-md-3'
+    %span.offset-md-2.col-md-8.alert.alert-danger.text-center{role: 'alert'}
+      = t('.disclaimer', default: 'Use at yor own risk!')
 
-  %nav.navbar.navbar-light.bg-light.navbar-expand-md.rounded.mb-3
+  %nav.row.navbar.navbar-light.bg-light.navbar-expand-md.rounded.mb-3
     %button.navbar-toggler{'aria-controls': 'navbarContent', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation', 'data-target': '#navbarContent', 'data-toggle': 'collapse', type: 'button'}
       %span.navbar-toggler-icon
 
