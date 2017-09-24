@@ -1,5 +1,20 @@
 %li.nav-item.active
-  = link_to t('.credentials', default: 'Credentials'), '#', class: 'nav-link'
+  = link_to t('.credentials', default: 'Credentials'), credentials_path, class: 'nav-link'
 -#%span.sr-only ' (current)'
 %li.nav-item
-  = link_to t('.disclaimer', default: 'Disclaimer'), '#', class: 'nav-link'
+  %a.nav-link{'data-target': '#disclaimerModal', 'data-toggle': 'modal'}
+    = t('.disclaimer', default: 'Disclaimer')
+
+#disclaimerModal.modal.fade{'aria-hidden': 'true', 'aria-labelledby': 'disclaimerModalTitle', role: 'dialog', tabindex: '-1'}
+  .modal-dialog.modal-lg{role: 'document'}
+    .modal-content
+      .modal-header
+        %h5#disclaimerModalTitle.modal-title= t('.disclaimer', default: 'Disclaimer')
+        %button.close{'aria-label': "#{t('.close', default: 'Close')}", 'data-dismiss': 'modal', type: 'button'}
+          %span{'aria-hidden': 'true'} &times;
+      .modal-body
+        .embed-responsive.embed-responsive-1by1
+          %iframe.embed-responsive-item{src: "/#{t('.disclaimer', default: 'Disclaimer')}.html"}
+      .modal-footer
+        %button.btn.btn-primary{'data-dismiss': 'modal', type: 'button'}= t('.close', default: 'Close')
+
