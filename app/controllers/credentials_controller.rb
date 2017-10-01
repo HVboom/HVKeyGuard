@@ -3,7 +3,7 @@ class CredentialsController < ApplicationController
 
   # GET /credentials
   def index
-    @credentials = Credential.filter(filter_params).ordered
+    @credentials = Credential.filter(filter_params).ordered.page(params[:page])
   end
 
   # GET /credentials/1

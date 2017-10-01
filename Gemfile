@@ -59,6 +59,9 @@ gem 'httparty'
 # Enable i18n based on request header
 gem 'http_accept_language'
 
+# Pagination
+gem 'kaminari'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -84,6 +87,9 @@ group :development do
   # I always make errors :-)
   gem 'better_errors'
   gem 'binding_of_caller'
+
+  # I love HAML
+  gem 'html2haml'
 end
 
 group :test do
