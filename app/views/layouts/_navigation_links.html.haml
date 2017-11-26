@@ -18,3 +18,6 @@
       .modal-footer
         %button.btn.btn-primary{'data-dismiss': 'modal', type: 'button'}= t('.close', default: 'Close')
 
+- if user_signed_in?
+  %li.nav-item
+    = link_to t('.logout', default: 'Logout'), destroy_user_session_path, method: :delete, class: 'nav-link'

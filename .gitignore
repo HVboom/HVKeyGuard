@@ -22,3 +22,6 @@ public/assets/
 /yarn-error.log
 
 .byebug_history
+
+# Ignore temporary files
+**.swp

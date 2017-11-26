@@ -6,12 +6,13 @@
     %meta{name: 'description', content: "#{content_for?(:description) ? yield(:description) : 'HVKeyGuard'}"}
     %meta{'http-equiv': 'expires', content: '0'}
     %meta{'http-equiv': 'cache-control', content: 'no-cache, no-store, must-revalidate'}
-    %meta{'http-equiv': 'refresh', content: "#{(User.timeout_in + 15.seconds).to_i}"}
+    -unless "#{controller.controller_name}" == 'sessions'
+      %meta{'http-equiv': 'refresh', content: "#{(User.timeout_in + 15.seconds).to_i}"}
     %title= content_for?(:title) ? yield(:title) : 'HVKeyGuard'
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
-  %body
+  %body{class: "#{controller.controller_name}"}
     %header
       = render 'layouts/navigation'
     %main.container{role: 'main'}
