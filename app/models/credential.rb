@@ -1,6 +1,9 @@
 class Credential < ApplicationRecord
   include Filterable
 
+  # ownership of the credential
+  belongs_to :access_group, optional: true
+
   # virtual attribute for the secured document
   attribute :document, :text
   # virtual attribute for the optional document password
@@ -24,6 +27,7 @@ class Credential < ApplicationRecord
   scope :ordered, -> { order :title }
   scope :title_filter, -> (title) { where('lower(title) like ?', "%#{title.downcase.strip}%") }
   scope :url_filter, -> (url) { where('lower(url) like ?', "%#{url.downcase.strip}%") }
+  scope :access_groups, -> (*access_groups) { where('access_group_id in (?)', *access_groups) }
 
   def document
     self[:document] = HVDigitalSafe::SecureDataStorage.new(self.token).document

@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608194015) do
+ActiveRecord::Schema.define(version: 20171126202541) do
+
+  create_table "access_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string "name", comment: "Identifier of the access group"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "access_groups_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "access_group_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["access_group_id", "user_id"], name: "access_group_and_user", unique: true
+    t.index ["user_id", "access_group_id"], name: "user_and_access_group", unique: true
+  end
 
   create_table "credentials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "title", null: false, comment: "Unique name of the credential"
@@ -21,6 +34,8 @@ ActiveRecord::Schema.define(version: 20170608194015) do
     t.boolean "secured", default: false, null: false, comment: "If set the stored data is protected by an additional password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "access_group_id", comment: "Ownership of the credential"
+    t.index ["access_group_id"], name: "index_credentials_on_access_group_id"
     t.index ["title"], name: "index_credentials_on_title", unique: true
     t.index ["token"], name: "index_credentials_on_token", unique: true
   end
@@ -38,8 +53,12 @@ ActiveRecord::Schema.define(version: 20170608194015) do
     t.datetime "locked_at", comment: "Used to look the user for some time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "access_group_id", comment: "Default access group"
+    t.index ["access_group_id"], name: "index_users_on_access_group_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
+  add_foreign_key "credentials", "access_groups"
+  add_foreign_key "users", "access_groups"
 end

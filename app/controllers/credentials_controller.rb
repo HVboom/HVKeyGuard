@@ -3,7 +3,10 @@ class CredentialsController < ApplicationController
 
   # GET /credentials
   def index
-    @credentials = Credential.filter(filter_params).ordered.page(params[:page])
+    @credentials = Credential.access_groups(access_group_ids).
+                              filter(filter_params).
+                              ordered.
+                              page(params[:page])
   end
 
   # GET /credentials/1
@@ -13,7 +16,7 @@ class CredentialsController < ApplicationController
 
   # GET /credentials/new
   def new
-    @credential = Credential.new
+    @credential = Credential.new(access_group: default_access_group)
   end
 
   # GET /credentials/1/edit_document
@@ -76,9 +79,16 @@ class CredentialsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def credential_params
-      params.require(:credential).permit(:title, :url, :login, :comment, :secured, :password, :document)
+      params.require(:credential).permit(:title, :url, :login, :comment, :secured, :password, :document, :access_group_id)
     end
     def filter_params
       params.slice(:title_filter, :url_filter)
+    end
+
+    def access_group_ids
+      current_user.access_groups.map { |g| g.id }
+    end
+    def default_access_group
+      current_user.default_access_group
     end
 end
