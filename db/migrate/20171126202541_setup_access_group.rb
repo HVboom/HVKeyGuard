@@ -4,7 +4,7 @@ class SetupAccessGroup < ActiveRecord::Migration[5.1]
     User.find_each do |user|
       access_group = AccessGroup.find_or_create_by!(name: user.name)
       user.access_groups << access_group unless user.access_groups.include?(access_group)
-      user.update_column(:access_group_id, access_group)
+      user.update_column(:access_group_id, access_group.id)
     end
 
     # If more than one user exists create a shared access group
@@ -21,7 +21,7 @@ class SetupAccessGroup < ActiveRecord::Migration[5.1]
 
     # Assign the ownership of all credential either to the shared access group or the personal access group
     if access_group
-      Credential.update_all(access_group_id: access_group)
+      Credential.update_all(access_group_id: access_group.id)
     end
   end
 
