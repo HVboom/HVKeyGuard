@@ -2,8 +2,6 @@ module HVDigitalSafe
   class SecureDataStorage #  < ActiveModelSerializers::Model
     include ActiveModel::Model
     include HTTParty
-    # FIXME: SSL raises "unknown message" error
-    # ssl_ca_file '/usr/local/etc/letsencrypt/live/hvboom.org/fullchain.pem'
     base_uri Rails.application.secrets.base_uri
     # debug_output
 
