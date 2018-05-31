@@ -1,6 +1,8 @@
 module HVCrypto
   class Synchron
-    def initialize(message_key = Rails.application.secrets.message_key)
+    def initialize(message_key = nil)
+      # ensure a message_key is always set
+      message_key ||= Rails.application.secrets.message_key
       key = ActiveSupport::KeyGenerator.new(message_key).
         generate_key(Rails.application.secrets.secret_key_base, 32)
       @encryptor = ActiveSupport::MessageEncryptor.new(key)
