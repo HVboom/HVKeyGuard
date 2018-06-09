@@ -6,6 +6,8 @@ module HVCrypto
       key = ActiveSupport::KeyGenerator.new(message_key).
         generate_key(Rails.application.secrets.secret_key_base, 32)
       @encryptor = ActiveSupport::MessageEncryptor.new(key)
+      # Fallback to an old cipher instead of new default aes-256-gcm.
+      @encryptor.rotate cipher: "aes-256-cbc"
     end
 
     # Encodes and signs with MessageEncryptor
