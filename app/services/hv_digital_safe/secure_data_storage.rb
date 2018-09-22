@@ -15,7 +15,7 @@ module HVDigitalSafe
     end
 
     def save
-      patch("/#{@token}", data)
+      patch("/", data)
     end
 
     def document
