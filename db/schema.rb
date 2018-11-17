@@ -10,22 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171126202541) do
+ActiveRecord::Schema.define(version: 2017_11_26_202541) do
 
-  create_table "access_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  create_table "access_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", comment: "Identifier of the access group"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "access_groups_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  create_table "access_groups_users", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "access_group_id", null: false
     t.bigint "user_id", null: false
     t.index ["access_group_id", "user_id"], name: "access_group_and_user", unique: true
     t.index ["user_id", "access_group_id"], name: "user_and_access_group", unique: true
   end
 
-  create_table "credentials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  create_table "credentials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title", null: false, comment: "Unique name of the credential"
     t.string "url", comment: "URL to have a direct link to access the web page"
     t.string "login", comment: "User or email used to login to the web page"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20171126202541) do
     t.index ["token"], name: "index_credentials_on_token", unique: true
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false, comment: "Can be used as unique identifier of the user"
     t.string "name", default: "", null: false, comment: "Can be used as unique identifier of the user"
     t.string "encrypted_password", default: "", null: false, comment: "Password for the user"
