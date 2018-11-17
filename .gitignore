@@ -21,7 +21,11 @@ public/assets/
 /node_modules
 /yarn-error.log
 
+# Ignore debuging history
 .byebug_history
+
+# Ignore rspec temporary test results
+/spec/examples.txt
 
 # Ignore temporary files
 **.swp
