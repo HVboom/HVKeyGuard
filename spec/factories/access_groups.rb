@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :access_group do
-    name "MyString"
+    name { "MyString" }
   end
 end
