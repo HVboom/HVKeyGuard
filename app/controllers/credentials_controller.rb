@@ -4,7 +4,7 @@ class CredentialsController < ApplicationController
   # GET /credentials
   def index
     @credentials = Credential.access_groups(access_group_ids).
-                              filter(filter_params).
+                              filter_by(filter_params).
                               ordered.
                               page(params[:page])
   end
