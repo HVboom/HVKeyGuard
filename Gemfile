@@ -49,7 +49,7 @@ gem 'haml-rails'
 
 # I like Bootstrap
 gem 'simple_form'
-gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
+gem 'bootstrap', '~> 4'
 
 # Protect the app with Devise
 gem 'devise'
