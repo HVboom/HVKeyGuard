@@ -30,7 +30,7 @@ class Credential < ApplicationRecord
   scope :access_groups, -> (*access_groups) { where('access_group_id in (?)', *access_groups) }
 
   def document
-    self[:document] = HVDigitalSafe::SecureDataStorage.new(self.token).document
+    self[:document] = HvDigitalSafe::SecureDataStorage.new(self.token).document
     if self.secured
       self[:document] = HVCrypto::Synchron.new(self.password).decode(self[:document])
     end
@@ -49,11 +49,11 @@ class Credential < ApplicationRecord
 
   private
     def set_token
-      self.token = HVDigitalSafe::SecureDataStorage.new.token
+      self.token = HvDigitalSafe::SecureDataStorage.new.token
     end
 
     def save_document
       doc = self[:document]
-      doc.blank? || HVDigitalSafe::SecureDataStorage.new(self.token, doc).save
+      doc.blank? || HvDigitalSafe::SecureDataStorage.new(self.token, doc).save
     end
 end

@@ -7,7 +7,7 @@ module HVboom
 
     def export
       puts "Export to '#{csv_file}' ..."
-      CSV.open(csv_file, 'w', csv_options) do |csv|
+      CSV.open(csv_file, 'w', **csv_options) do |csv|
         @credentials.each do |credential|
           csv << to_csv(credential)
           putc "."
