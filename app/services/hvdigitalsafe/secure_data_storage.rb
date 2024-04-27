@@ -1,4 +1,4 @@
-module HvDigitalSafe
+module HVDigitalSafe
   class SecureDataStorage #  < ActiveModelSerializers::Model
     include ActiveModel::Model
     include HTTParty
