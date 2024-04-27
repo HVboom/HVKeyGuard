@@ -9,12 +9,20 @@ Bundler.require(*Rails.groups)
 module HVKeyGuard
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.1
+    config.load_defaults 7.1
 
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration can go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded after loading
-    # the framework and any gems in your application.
+    # Please, add to the `ignore` list any other `lib` subdirectories that do
+    # not contain `.rb` files, or that should not be reloaded or eager loaded.
+    # Common ones are `templates`, `generators`, or `middleware`, for example.
+    config.autoload_lib(ignore: %w(assets tasks))
+
+    # Configuration for the application, engines, and railties goes here.
+    #
+    # These settings can be overridden in specific environments using the files
+    # in config/environments, which are processed later.
+    #
+    # config.time_zone = "Central Time (US & Canada)"
+    # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.
     config.generators.system_tests = nil
@@ -27,5 +35,14 @@ module HVKeyGuard
     # I18n prefering German
     I18n.available_locales = [:en, :de]
     I18n.default_locale = :de
+
+    # Single DB connection
+    ### config.active_record.legacy_connection_handling = false
+
+    # Allow access from and to all application specific domains
+    # see https://guides.rubyonrails.org/configuring.html#actiondispatch-hostauthorization
+    #   production:  hvkeyguard.hvboom.org
+    #   development: hvkeyguard.demo.hvboom.org
+    config.hosts = [ %r{hvkeyguard\.([^\.]+\.)?hvboom\.org} ]
   end
 end

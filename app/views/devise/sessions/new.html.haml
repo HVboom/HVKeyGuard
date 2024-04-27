@@ -8,10 +8,10 @@
           .form-group.row
             = f.label :login, class: 'col-md-3 col-form-label text-right'
             .col-md-8
-              = f.text_field :login, autofocus: true, class: 'form-control', placeholder: t('.login_placeholder', default: 'Name or eMail')
+              = f.text_field :login, autofocus: true, class: 'form-control', placeholder: t('.login_placeholder', default: 'Name or eMail'), require: true
           .form-group.row
             = f.label :password, class: 'col-md-3 col-form-label text-right'
             .col-md-8
-              = f.password_field :password, autocomplete: 'off', class: 'form-control'
+              = f.password_field :password, autocomplete: 'current-password', class: 'form-control', require: true
           = f.submit  t('.sign_in_button', default: 'Sign in'), class: 'btn btn-outline-primary btn-block col-md-10 offset-md-1'
       .card-footer

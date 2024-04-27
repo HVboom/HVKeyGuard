@@ -39,15 +39,15 @@ unless Rails.env.production?
       Credential.create! do |c|
         c.title = Faker::Name.unique.name
         c.url = Faker::Internet.url
-        c.login = Faker::Internet.safe_email
-        c.secured =  Faker::Boolean.boolean(0.2)
+        c.login = Faker::Internet.email
+        c.secured =  Faker::Boolean.boolean(true_ratio: 0.2)
         c.password = 'Demo'
         if c.secured
           c.document = Faker::Lorem.word
         else
-          c.document = Faker::Internet.password(10, 20)
+          c.document = Faker::Internet.password(min_length: 10, max_length: 20)
         end
-        c.comment = Faker::Lorem.sentence(3, true) if Faker::Boolean.boolean(0.2)
+        c.comment = Faker::Lorem.sentence(word_count: 3, supplemental: true) if Faker::Boolean.boolean(true_ratio: 0.2)
         c.access_group = AccessGroup.find(AccessGroup.ids.shuffle.first)
       end
     rescue ActiveRecord::RecordNotUnique

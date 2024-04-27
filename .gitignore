@@ -10,7 +10,8 @@ vendor/bundle/
 public/assets/
 
 # Ignore sensitive files
-/config/secrets.yml
+/config/master.key
+/config/credentials/*.key
 
 # Ignore all logfiles and tempfiles.
 /log/*

@@ -18,4 +18,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.uncountable 'HVKeyGuard'
   inflect.acronym 'HVCrypto'
   inflect.uncountable 'HVCrypto'
+  inflect.acronym 'HVDigitalSafe'
+  inflect.uncountable 'HVDigitalSafe'
 end

@@ -12,7 +12,10 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+<<<<<<< HEAD
 #gem 'rails', '~> 5.2'
+=======
+>>>>>>> 3ea2104 (Finalize bump to Ruby 3.3.0 & Rails 7.1.3)
 gem 'rails', '~> 7.1'
 # Use mysql as the database for Active Record
 gem 'mysql2' #, '>= 0.3.18', '< 0.5'
@@ -39,7 +42,7 @@ gem 'active_model_serializers'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap' #, '>= 1.1.0', require: false
 
 
 # Use jquery as the JavaScript library
@@ -50,7 +53,7 @@ gem 'haml-rails'
 
 # I like Bootstrap
 gem 'simple_form'
-gem 'bootstrap', '~> 4'
+gem 'bootstrap' #, '~> 4'
 
 # Protect the app with Devise
 gem 'devise'
@@ -74,6 +77,7 @@ group :development, :test do
   # Testing with RSpec
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
 
   # Better console
   gem 'pry-rails'
@@ -82,7 +86,7 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
+  gem 'web-console' #, '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
@@ -101,8 +105,6 @@ group :test do
   # Everything you need for your Integration tests
   gem 'capybara'
   gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'webdrivers'
 
   gem 'database_cleaner'
 end

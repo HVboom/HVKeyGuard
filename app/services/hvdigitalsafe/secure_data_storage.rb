@@ -2,7 +2,7 @@ module HvDigitalSafe
   class SecureDataStorage #  < ActiveModelSerializers::Model
     include ActiveModel::Model
     include HTTParty
-    base_uri Rails.application.secrets.base_uri
+    base_uri Rails.application.credentials[:base_uri]
     # debug_output
 
     # attributes :token, :document
@@ -32,7 +32,7 @@ module HvDigitalSafe
       end
 
       def get(path)
-        # Rails.logger.debug "Get: #{path.inspect} / #{headers}"
+        Rails.logger.debug "Get: #{path.inspect} / #{headers}"
         response = self.class.get(path, headers: headers, format: :json)
 
         begin
@@ -55,7 +55,7 @@ module HvDigitalSafe
 
       def headers
         {
-          'X-Api-Key': Rails.application.secrets.api_key,
+          'X-Api-Key': Rails.application.credentials[:api_key],
           'Content-Type': 'application/vnd.api+json'
         }.freeze
       end

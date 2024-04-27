@@ -29,7 +29,7 @@ RSpec.describe CredentialsController, type: :controller do
   # Credential. As you add validations to Credential, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryBot.attributes_for(:credential, access_group_id: @user.access_group_id)
   }
 
   let(:invalid_attributes) {
@@ -39,12 +39,16 @@ RSpec.describe CredentialsController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # CredentialsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { { } }
+
+  login_user
 
   describe "GET #index" do
     it "returns a success response" do
       credential = Credential.create! valid_attributes
       get :index, params: {}, session: valid_session
+      pp response.inspect
+      expect(response).to render_template(:index)
       expect(response).to be_success
     end
   end

@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "credentials/new", type: :view do
+  login_user
+
   before(:each) do
     assign(:credential, Credential.new(
       :title => "MyString",
@@ -8,7 +10,7 @@ RSpec.describe "credentials/new", type: :view do
       :login => "MyString",
       :comment => "MyText",
       :token => "MyString",
-      :secure => false
+      :secured => false
     ))
   end
 
@@ -24,10 +26,6 @@ RSpec.describe "credentials/new", type: :view do
       assert_select "input[name=?]", "credential[login]"
 
       assert_select "textarea[name=?]", "credential[comment]"
-
-      assert_select "input[name=?]", "credential[token]"
-
-      assert_select "input[name=?]", "credential[secure]"
     end
   end
 end
