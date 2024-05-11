@@ -28,10 +28,8 @@ class CredentialsController < ApplicationController
     session[:password] = nil
     if !@credential.secured || (@credential.secured && !@credential.password.blank?)
       @credential.document
-    else
-      @credential.valid?
     end
-    render :edit
+    render :edit, status: @credential.valid? ? :ok : :forbidden
   end
 
   # GET /credentials/1/edit
@@ -47,7 +45,7 @@ class CredentialsController < ApplicationController
     if @credential.save
       redirect_to @credential, notice: t('.notice', default: 'Credential was successfully created.')
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -60,7 +58,7 @@ class CredentialsController < ApplicationController
       if @credential.update(credential_params)
         redirect_to @credential, notice: t('.notice', default: 'Credential was successfully updated.')
       else
-        render :edit
+        render :edit, status: :unprocessable_entity
       end
     end
   end

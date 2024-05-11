@@ -1,5 +1,7 @@
 module HVCrypto
   class Synchron
+    WRONG_PASSWORD = '***'
+
     def initialize(message_key = nil)
       # ensure a message_key is always set
       message_key ||= Rails.application.credentials[:message_key]
@@ -19,7 +21,7 @@ module HVCrypto
     def decode(data)
       @encryptor.decrypt_and_verify(data)
     rescue ActiveSupport::MessageVerifier::InvalidSignature, ActiveSupport::MessageEncryptor::InvalidMessage
-      'Wrong password'
+      WRONG_PASSWORD
     end
   end
 end

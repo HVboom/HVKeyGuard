@@ -3,15 +3,10 @@
     .card
       .card-header
         %h4= t('.sign_in', default: 'Sign in')
-      .card-block
-        = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form' }) do |f|
-          .form-group.row
-            = f.label :login, class: 'col-md-3 col-form-label text-right'
-            .col-md-8
-              = f.text_field :login, autofocus: true, class: 'form-control', placeholder: t('.login_placeholder', default: 'Name or eMail'), require: true
-          .form-group.row
-            = f.label :password, class: 'col-md-3 col-form-label text-right'
-            .col-md-8
-              = f.password_field :password, autocomplete: 'current-password', class: 'form-control', require: true
+      .card-body
+        = simple_form_for(resource, as: resource_name, url: session_path(resource_name), wrapper: :floating_labels_form, html: {role: 'form'}) do |f|
+          = f.input :login, autofocus: true, label: t('.login_placeholder', default: 'Name or eMail'), required: true, input_html: { autocomplete: "section-#{ENV['USER']}-kg-login username" }
+          = f.input :password, required: true, input_html: { autocomplete: "section-#{ENV['USER']}-kg-login current-password" }
           = f.submit  t('.sign_in_button', default: 'Sign in'), class: 'btn btn-outline-primary btn-block col-md-10 offset-md-1'
       .card-footer
+

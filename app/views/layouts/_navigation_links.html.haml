@@ -1,23 +1,28 @@
 %li.nav-item.active
-  = link_to t('.credentials', default: 'Credentials'), credentials_path, class: 'nav-link'
--#%span.sr-only ' (current)'
+  = link_to credentials_path, class: 'nav-link' do
+    %i.bi.bi-journal-text{ 'aria-hidden': true }
+    = t('.credentials', default: 'Credentials')
+-#%span.visually-hidden ' (current)'
 %li.nav-item
-  %a.nav-link{'data-target': '#disclaimerModal', 'data-toggle': 'modal'}
+  %a.nav-link{'data-bs-target': '#disclaimerModal', 'data-bs-toggle': 'modal', role: 'button'}
+    %i.bi.bi-patch-exclamation-fill.text-warning{ 'aria-hidden': true } 
     = t('.disclaimer', default: 'Disclaimer')
 
 #disclaimerModal.modal.fade{'aria-hidden': 'true', 'aria-labelledby': 'disclaimerModalTitle', role: 'dialog', tabindex: '-1'}
-  .modal-dialog.modal-lg{role: 'document'}
+  .modal-dialog.modal-lg.modal-dialog-centered{role: 'document'}
     .modal-content
       .modal-header
         %h5#disclaimerModalTitle.modal-title= t('.disclaimer', default: 'Disclaimer')
-        %button.close{'aria-label': "#{t('.close', default: 'Close')}", 'data-dismiss': 'modal', type: 'button'}
-          %span{'aria-hidden': 'true'} &times;
+        %button.btn-close{'aria-label': "#{t('.close', default: 'Close')}", 'aria-hidden': 'true', 'data-bs-dismiss': 'modal', type: 'button'}
       .modal-body
-        .embed-responsive.embed-responsive-1by1
-          %iframe.embed-responsive-item{src: "/#{t('.disclaimer', default: 'Disclaimer')}.html"}
+        .ratio.ratio-1x1
+          %iframe{src: "/#{t('.disclaimer', default: 'Disclaimer')}.html"}
       .modal-footer
-        %button.btn.btn-primary{'data-dismiss': 'modal', type: 'button'}= t('.close', default: 'Close')
+        %button.btn.btn-primary{'data-bs-dismiss': 'modal', type: 'button'}= t('.close', default: 'Close')
 
 - if user_signed_in?
   %li.nav-item
-    = link_to t('.logout', default: 'Logout'), destroy_user_session_path, method: :delete, class: 'nav-link'
+    = link_to destroy_user_session_path, method: :delete, class: 'nav-link' do
+      %i.bi.bi-power.text-danger{ 'aria-hidden': true }
+      = t('.logout', default: 'Logout')
+

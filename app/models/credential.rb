@@ -24,6 +24,9 @@ class Credential < ApplicationRecord
     presence: true,
     if: -> { self.secured }
 
+  validate :document_successfully_decrypted,
+    if: -> { self.secured && self[:document].present? }
+
   scope :ordered, -> { order :title }
   scope :title_filter, -> (title) { where('lower(title) like ?', "%#{title.downcase.strip}%") }
   scope :url_filter, -> (url) { where('lower(url) like ?', "%#{url.downcase.strip}%") }
@@ -56,4 +59,11 @@ class Credential < ApplicationRecord
       doc = self[:document]
       doc.blank? || HVDigitalSafe::SecureDataStorage.new(self.token, doc).save
     end
+
+    def document_successfully_decrypted
+      if self[:document] == HVCrypto::Synchron::WRONG_PASSWORD
+        errors.add(:password, :invalid)
+        errors.add(:document, :invalid)
+      end
+   end
 end

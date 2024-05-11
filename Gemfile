@@ -15,22 +15,43 @@ end
 gem 'rails', '~> 7.1'
 # Use mysql as the database for Active Record
 gem 'mysql2' #, '>= 0.3.18', '< 0.5'
+
+# The modern asset pipeline for Rails [https://github.com/rails/propshaft]
+gem "propshaft"
+
+# Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
+gem "jsbundling-rails"
+
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "turbo-rails"
+
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
+
+# Bundle and process CSS [https://github.com/rails/cssbundling-rails]
+gem "cssbundling-rails"
+
+# Build JSON APIs with ease [https://github.com/rails/jbuilder]
+gem "jbuilder"
+
 # Use SCSS for stylesheets
-gem 'sass-rails' # , '~> 5.0'
+#gem 'sass-rails' # , '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier' # , '>= 1.3.0'
+#gem 'uglifier' # , '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails' # , '~> 4.2'
+#gem 'coffee-rails' # , '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks' # , '~> 5'
+#gem 'turbolinks' # , '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
+
+
 gem 'active_model_serializers'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
+gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -42,7 +63,7 @@ gem 'bootsnap' #, '>= 1.1.0', require: false
 
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+# gem 'jquery-rails'
 
 # HAML is my preferred template language
 gem 'haml-rails'
@@ -87,7 +108,7 @@ group :development do
   gem 'spring'
 
   # Used to generate a standard layout for Bootstrap frontend
-  gem 'rails_layout'
+  #gem 'rails_layout'
 
   # I always make errors :-)
   gem 'better_errors'
