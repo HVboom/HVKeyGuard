@@ -1,3 +1,5 @@
+require 'csv'
+
 module HVboom
   class CredentialExporter
     def initialize(filename_prefix, credentials)
