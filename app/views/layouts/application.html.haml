@@ -12,8 +12,9 @@
     = stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', type: 'module'
     = csrf_meta_tags
+    = csp_meta_tag
   %body{class: "#{controller.controller_name}"}
-    %header
+    %header.main-header
       = render 'layouts/navigation'
     %main.container{role: 'main'}
       = render 'layouts/messages'

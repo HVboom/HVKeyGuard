@@ -12,3 +12,6 @@ application.register("reveal", RevealController);
 
 import Clipboard from "@stimulus-components/clipboard";
 application.register("clipboard", Clipboard);
+
+import ScrollHeightController from "./scroll_height_controller";
+application.register("scroll-height", ScrollHeightController);

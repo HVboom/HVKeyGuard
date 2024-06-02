@@ -1,6 +1,7 @@
-- flash.each do |name, msg|
-  - if msg.is_a?(String)
-    %div{class: "alert alert-#{name.to_s == 'notice' ? 'success' : 'danger'} alert-dismissible fade show", role: 'alert'}
-      %button.btn-close{'aria-label': "#{t('.close', default: 'Close')}", 'aria-hidden': 'true', 'data-bs-dismiss': 'alert', type: 'button'}
-      = content_tag :div, msg, id: "flash_#{name}"
+.messages
+  - flash.each do |name, msg|
+    - if msg.is_a?(String)
+      %div{class: "alert alert-#{name.to_s == 'notice' ? 'success' : 'danger'} alert-dismissible fade show", role: 'alert'}
+        %button.btn-close{'aria-label': "#{t('.close', default: 'Close')}", 'aria-hidden': 'true', 'data-bs-dismiss': 'alert', type: 'button'}
+        = content_tag :div, msg, id: "flash_#{name}"
 
