@@ -15,9 +15,8 @@ RSpec.describe "credentials/index", type: :view do
       ),
       Credential.create!(
         :title => "Title2",
-        :url => "Url2",
+        :url => "https://Url2",
         :login => "Login2",
-        :comment => "MyText2",
         :token => "Token2",
         :secured => false
       )
@@ -26,9 +25,9 @@ RSpec.describe "credentials/index", type: :view do
 
   it "renders a list of credentials" do
     render
-    assert_select "tr>td", :text => /^Title/, :count => 2
-    assert_select "tr>td", :text => /^Url/, :count => 2
-    assert_select "tr>td", :text => /^Login/, :count => 2
-    assert_select "tr>td", :text => /^MyText/, :count => 2
+    assert_select "h5.card-title", :text => /^Title/, :count => 1
+    assert_select "a.card-title", :href => /^http/, :count => 1
+    assert_select "p.card-text", :text => /^Login/, :count => 2
+    assert_select ".card-body > p", :text => /^MyText/, :count => 1
   end
 end
