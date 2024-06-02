@@ -2,10 +2,11 @@ module HVCrypto
   class Synchron
     WRONG_PASSWORD = '***'
 
-    def initialize(message_key = nil)
+    def initialize(message_key = nil, hash_digest_class = nil)
       # ensure a message_key is always set
       message_key ||= Rails.application.credentials[:message_key]
-      key = ActiveSupport::KeyGenerator.new(message_key).
+      hash_digest_class ||= OpenSSL::Digest::SHA1 if Rails.application.credentials.fetch(:preserve_existing_data)
+      key = ActiveSupport::KeyGenerator.new(message_key, hash_digest_class: hash_digest_class).
         generate_key(Rails.application.credentials[:secret_key_base], 32)
       @encryptor = ActiveSupport::MessageEncryptor.new(key)
       # Fallback to an old cipher instead of new default aes-256-gcm.
