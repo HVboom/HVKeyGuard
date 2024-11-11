@@ -15,3 +15,6 @@ application.register("clipboard", Clipboard);
 
 import ScrollHeightController from "./scroll_height_controller";
 application.register("scroll-height", ScrollHeightController);
+
+import UrlOpenerController from "./url_opener_controller";
+application.register("url-opener", UrlOpenerController);
