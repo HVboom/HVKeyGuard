@@ -1,5 +1,5 @@
-class AddAccessGroupToUsers < ActiveRecord::Migration[5.1]
+class AddAccessGroupToUsers < ActiveRecord::Migration[7.2]
   def change
-    add_reference :users, :access_group, foreign_key: true, comment: 'Default access group'
+    add_reference :users, :access_group, type: :uuid, foreign_key: true, comment: 'Default access group'
   end
 end

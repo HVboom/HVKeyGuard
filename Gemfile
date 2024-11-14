@@ -1,8 +1,3 @@
-#ruby=ruby-3.3.0
-#
-#ruby-gemset=HVKeyGuard
-#
-
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -10,11 +5,10 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.1'
-# Use mysql as the database for Active Record
-gem 'mysql2' #, '>= 0.3.18', '< 0.5'
+gem 'rails', '~> 7.2'
+# Use postgresql as the database for Active Record
+gem "pg" # , "~> 1.1"
 
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
@@ -61,6 +55,9 @@ gem 'redis', '~> 3.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap' #, '>= 1.1.0', require: false
 
+# Depricated gems
+# ruby 3.5
+gem 'ostruct'
 
 # Use jquery as the JavaScript library
 # gem 'jquery-rails'

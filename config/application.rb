@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module HVKeyGuard
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.1
+    config.load_defaults 7.2
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
@@ -27,11 +27,6 @@ module HVKeyGuard
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    # Use UUIDs instead of integer as primary keys
-    # config.generators do |g|
-    #   g.orm :active_record, primary_key_type: :uuid
-    # end
-
     # I18n prefering German
     I18n.available_locales = [:en, :de]
     I18n.default_locale = :de
@@ -39,10 +34,15 @@ module HVKeyGuard
     # Single DB connection
     ### config.active_record.legacy_connection_handling = false
 
+    # Use UUIDs for primary keys by default
+    config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+    end
+
     # Allow access from and to all application specific domains
     # see https://guides.rubyonrails.org/configuring.html#actiondispatch-hostauthorization
-    #   production:  hvkeyguard.hvboom.org
-    #   development: hvkeyguard.demo.hvboom.org
-    config.hosts = [ %r{hvkeyguard\.([^\.]+\.)?hvboom\.org} ]
+    #   production:  hvkeyguard.hvboom.biz
+    #   development: hvkeyguard.demo.hvboom.biz
+    config.hosts = [ %r{hvkeyguard\.([^\.]+\.)?hvboom\.biz} ]
   end
 end

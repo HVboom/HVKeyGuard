@@ -1,6 +1,6 @@
-class CreateCredentials < ActiveRecord::Migration[5.1]
+class CreateCredentials < ActiveRecord::Migration[7.2]
   def change
-    create_table :credentials do |t|
+    create_table :credentials, id: :uuid do |t|
       t.string :title, null: false, comment: 'Unique name of the credential'
       t.string :url, comment: 'URL to have a direct link to access the web page'
       t.string :login, comment: 'User or email used to login to the web page'

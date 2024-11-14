@@ -20,7 +20,7 @@ module HVboom
 
   private
     def csv_header
-       %w(Title URL Login Document Comment Group)
+       %w(Title URL Login Document Secured Comment Group)
     end
 
     def to_csv(credential)
@@ -29,6 +29,7 @@ module HVboom
       output << credential.url
       output << credential.login
       output << credential.document
+      output << credential.secured
       output << credential.comment
       output << credential.access_group.name
       output

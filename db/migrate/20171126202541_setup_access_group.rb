@@ -1,4 +1,4 @@
-class SetupAccessGroup < ActiveRecord::Migration[5.1]
+class SetupAccessGroup < ActiveRecord::Migration[7.2]
   def up
     # Create a personal access group for each user
     User.find_each do |user|

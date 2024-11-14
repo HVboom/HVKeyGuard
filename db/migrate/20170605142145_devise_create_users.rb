@@ -1,6 +1,6 @@
-class DeviseCreateUsers < ActiveRecord::Migration[5.1]
+class DeviseCreateUsers < ActiveRecord::Migration[7.2]
   def change
-    create_table :users do |t|
+    create_table :users, id: :uuid do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: '', comment: 'Can be used as unique identifier of the user'
       t.string :name,               null: false, default: '', comment: 'Can be used as unique identifier of the user'
