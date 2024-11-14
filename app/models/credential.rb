@@ -11,6 +11,7 @@ class Credential < ApplicationRecord
 
   before_create :set_token
   after_save :save_document
+  after_destroy :reset_document
 
   validates :title,
     presence: true,
@@ -58,6 +59,11 @@ class Credential < ApplicationRecord
     def save_document
       doc = self[:document]
       doc.blank? || HVDigitalSafe::SecureDataStorage.new(self.token, doc).save
+    end
+
+    def reset_document
+      doc = Faker::Internet.password(min_length: 8, max_length: 20, mix_case: true, special_characters: true)
+      HVDigitalSafe::SecureDataStorage.new(self.token, doc).save
     end
 
     def document_successfully_decrypted
