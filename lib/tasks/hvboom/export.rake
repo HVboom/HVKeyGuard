@@ -8,7 +8,7 @@ module HVboom
           unless password.blank?
             credential.password = password
           else
-            credential.password = STDIN.getpass(prompt(credential)).chomp
+            credential.password = STDIN.getpass(prompt(credential))
           end
         end
       end

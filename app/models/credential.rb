@@ -9,10 +9,13 @@ class Credential < ApplicationRecord
   # virtual attribute for the optional document password
   attribute :password
 
+  # Callbacks
+  before_validation :normalize_title
   before_create :set_token
   after_save :save_document
   after_destroy :reset_document
 
+  # Validations
   validates :title,
     presence: true,
     uniqueness: { case_sensitive: false }
@@ -52,8 +55,24 @@ class Credential < ApplicationRecord
   end
 
   private
+    def normalize_title
+      self.title.strip! if self.title.present?
+    end
+
     def set_token
-      self.token = HVDigitalSafe::SecureDataStorage.new.token
+      max_retries = 10
+      retries = 0
+    
+      loop do
+        self.token = HVDigitalSafe::SecureDataStorage.new.token
+        break unless Credential.exists?(token: self.token)
+    
+        retries += 1
+        if retries >= max_retries
+          errors.add(:token, "could not generate a unique token after #{max_retries} attempts")
+          raise ActiveRecord::RecordInvalid.new(self)
+        end
+      end
     end
 
     def save_document

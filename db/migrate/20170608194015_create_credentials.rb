@@ -10,7 +10,7 @@ class CreateCredentials < ActiveRecord::Migration[7.2]
 
       t.timestamps
     end
-    add_index :credentials, :title, unique: true
+    add_index :credentials, 'lower(title)', unique: true
     add_index :credentials, :token, unique: true
   end
 end

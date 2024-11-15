@@ -1,12 +1,10 @@
 module HVboom::Export::User
   include HVboom::Export
 
-  module User
-    def usage
-      available_users = User.all.pluck(:name).sort
-      puts "Not all users are found. Available users: #{available_users.join(' ')}"
-      puts "Usage: rake hvboom:export:users['Demo1 Demo3'] PASSWORD='Demo'"
-    end
+  def usage
+    available_users = User.all.pluck(:name).sort
+    puts "Not all users are found. Available users: #{available_users.join(' ')}"
+    puts "Usage: rake hvboom:export:users['Demo1 Demo3'] PASSWORD='Demo'"
   end
 end
 

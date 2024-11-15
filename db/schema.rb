@@ -37,8 +37,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_04_15_083142) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "access_group_id", comment: "Ownership of the credential"
+    t.index "lower((title)::text)", name: "index_credentials_on_lower_title", unique: true
     t.index ["access_group_id"], name: "index_credentials_on_access_group_id"
-    t.index ["title"], name: "index_credentials_on_title", unique: true
     t.index ["token"], name: "index_credentials_on_token", unique: true
   end
 
