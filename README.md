@@ -9,7 +9,7 @@
 Please note that **I am not an IT security expert**.  
 Use this application at your own risk and make sure you review the code and security setup yourself!
 
-📄 See [public/Disclaimer.html](public/Disclaimer.html) for the full disclaimer.
+📄 See the [Disclaimer](https://hvkeyguard.demo.hvboom.biz/Disclaimer.html) for important usage information.
 
 ---
 
@@ -90,7 +90,7 @@ EDITOR=vi rails credentials:edit --environment=production
 ```
 
 > **ℹ️ Hint:**  
-> An example file is available at `config/credentials.yml.example` to guide your setup.
+> An example file is available at [`config/credentials.yml.example`](config/credentials.yml.example) to guide your setup.
 
 You must configure endpoints, JWT secrets, and communication settings.
 
@@ -105,7 +105,7 @@ rails db:create db:schema:load
 ```
 
 > **ℹ️ Hint:**  
-> Setup examples and hints are found in `db/seeds.rb`.  
+> Setup examples and hints are found in [`db/seeds.rb`](db/seeds.rb).  
 > It is safe to load seeds even in production (they do not create records by default).
 
 ---
@@ -128,6 +128,16 @@ SecureDataStorage.seed!
 
 You can run `SecureDataStorage.seed!` multiple times to prepare more safe boxes if needed.
 
+Generate your API key for HVKeyGuard communication:
+
+```ruby
+API_KEY_AUD = Rails.application.credentials[:api_key_aud]
+audience = "<your-custom-audience>" # Or use SecureRandom.base58(32)
+HVCrypto::JWT.encode(audience, { aud: API_KEY_AUD })
+```
+
+Use the generated JWT token in HVKeyGuard to configure communication securely.
+
 ---
 
 ### 7. Create Users and Access Groups (HVKeyGuard)
@@ -140,17 +150,28 @@ rails console -e production
 # Example: Create access group
 access_group = AccessGroup.create!(name: "Admins")
 
-# Example: Create user
+# Example: Create user using the name to setup the default access group
 user = User.create!(
+  name: "Demo"
   email: "admin@example.com",
-  password: "super-secure-password",
-  access_group: access_group
+  password: "super-secure-password"
 )
 
-# The user's default access group is set automatically.
+# The user's default access group is set automatically, but can be overridden:
+user.default_access_group = AccessGroup.find_by(name: "Admins")
+
 # To add additional group access:
 user.access_groups << AccessGroup.find_by(name: "OtherGroup")
 ```
+
+🔒 **Important:**  
+HVKeyGuard does not provide a UI for user management — everything is managed manually for security reasons.
+
+### ⚡ **Security Tip**
+
+> After creating users and generating API keys, **remove your console history** to avoid leaking sensitive information:
+>
+>         rm $HOME/.irbrc_history
 
 ---
 
