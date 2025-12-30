@@ -84,6 +84,9 @@ gem 'http_accept_language'
 # Pagination
 gem 'kaminari'
 
+# Fix setting to fit the version used by the current Ruby
+gem "stringio", "= 3.1.2"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :windows]
